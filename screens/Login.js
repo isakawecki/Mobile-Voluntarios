@@ -37,7 +37,7 @@ const Login = ({ navigation }) => {
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.container}>
-          {/* IMAGEM DE FUNDO */}
+
           <Image
             source={require("../assets/images/fundo2.png")}
             style={styles.backgroundImage}
@@ -141,7 +141,6 @@ const styles = StyleSheet.create({
   },
 
     textoBotao:{
-  
     color: "#fff",
     fontSize: 22,
     fontFamily: "NunitoSans-Light", 

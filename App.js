@@ -12,6 +12,8 @@ import Login from './screens/Login';
 import RecuperacaoSenha from './screens/RecuperacaoSenha';
 import TelaSMS from './screens/TelaSMS';
 import TelaEmail from './screens/TelaEmail';
+import Home from './screens/Home';
+
 
 
 
@@ -43,6 +45,7 @@ export default function App() {
         <Pilha.Screen name="RecuperacaoSenha" component={RecuperacaoSenha} />
         <Pilha.Screen name="TelaSMS" component={TelaSMS} />
         <Pilha.Screen name="TelaEmail" component={TelaEmail} />
+        <Pilha.Screen name="Home" component={Home} />
       </Pilha.Navigator>
     </NavigationContainer>
   );
