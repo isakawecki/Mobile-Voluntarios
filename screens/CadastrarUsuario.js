@@ -26,8 +26,9 @@ const CadastrarUsuario = ({ navigation }) => {
       return;
     }
 
-    // Caso todos os campos estejam preenchidos
+    
     Alert.alert("Usuário criado!", `Nome: ${nome}\nEmail: ${email}`);
+     navigation.navigate("Home");
   };
 
   const handleCancelar = () => {

@@ -13,7 +13,9 @@ import RecuperacaoSenha from './screens/RecuperacaoSenha';
 import TelaSMS from './screens/TelaSMS';
 import TelaEmail from './screens/TelaEmail';
 import Home from './screens/Home';
-
+import SaibaMais from './screens/SaibaMais';
+import VerMais from './screens/VerMais';
+import DoacaoDinheiro from './screens/DoacaoDinheiro';
 
 
 
@@ -26,7 +28,7 @@ export default function App() {
     'NunitoSans-Light': require('./assets/fonts/NunitoLight-K7dKW.ttf'),
   });
 
-  // Verificação se as fontes carregaram
+  
   if (!fontsLoaded) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -46,6 +48,9 @@ export default function App() {
         <Pilha.Screen name="TelaSMS" component={TelaSMS} />
         <Pilha.Screen name="TelaEmail" component={TelaEmail} />
         <Pilha.Screen name="Home" component={Home} />
+        <Pilha.Screen name="SaibaMais" component= {SaibaMais} />
+        <Pilha.Screen name="VerMais" component= {VerMais} />
+        <Pilha.Screen name="DoacaoDinheiro" component= {DoacaoDinheiro} />
       </Pilha.Navigator>
     </NavigationContainer>
   );

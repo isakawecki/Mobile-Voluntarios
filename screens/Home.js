@@ -1,18 +1,26 @@
 import React from "react";
-import { 
-  View, 
-  Text, 
-  ScrollView, 
-  StyleSheet, 
-  Image, 
-  TouchableOpacity, 
-  ImageBackground 
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 
-const Home = () => {
+const Home = ({ navigation }) => {
+  const handleSaibaMais = () => {
+    navigation.navigate("SaibaMais");
+  };
+  const handleVerMais = () => {
+    navigation.navigate("VerMais");
+  };
+  const handleDoacaoDinheiro = () => {
+    navigation.navigate("DoacaoDinheiro");
+  };
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* TOPO COM ÍCONES */}
       <View style={styles.header}>
         <TouchableOpacity>
           <Image
@@ -36,10 +44,7 @@ const Home = () => {
 
         {/* BOTÕES */}
         <View style={styles.botoes}>
-          <TouchableOpacity
-            style={styles.botaoSaiba}
-            onPress={() => console.log("Saiba Mais clicado")}
-          >
+          <TouchableOpacity style={styles.botaoSaiba} onPress={handleSaibaMais}>
             <Text style={styles.textoSaiba}>Saiba Mais</Text>
           </TouchableOpacity>
 
@@ -54,11 +59,9 @@ const Home = () => {
         <View style={styles.linha} />
       </View>
 
-    
       <View style={styles.eventosContainer}>
         <Text style={styles.evca}>Eventos e campanhas</Text>
 
-        {/* CARDS COM IMAGENS */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -95,31 +98,31 @@ const Home = () => {
           </ImageBackground>
         </ScrollView>
 
-       
-        <TouchableOpacity 
-          style={styles.botaoVerMais} 
-          onPress={() => console.log("ok")}
-        >
+        <TouchableOpacity style={styles.botaoVerMais} onPress={handleVerMais}>
           <Text style={styles.textoVermais}>Ver mais...</Text>
         </TouchableOpacity>
         <View style={styles.eventosContainer}>
-        <Text style={styles.evca}>Faça uma doação </Text>
-         <View style={styles.doacoes}>
-             <Image
-                    source={require('../assets/images/Component 24.png')}
-                    style={styles.foto1}
-                    resizeMode="contain"
-                  />
-          <Image
-                    source={require('../assets/images/Component 25.png')}
-                    style={styles.foto}
-                    resizeMode="contain"
-                  />
-         </View>
+          <Text style={styles.evca}>Faça uma doação </Text>
+          <View style={styles.doacoes}>
+            <TouchableOpacity onPress={handleDoacaoDinheiro}>
+              <Image
+                source={require("../assets/images/Component 24.png")}
+                style={styles.foto1}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={handleSaibaMais}>
+              <Image
+                source={require("../assets/images/Component 25.png")}
+                style={styles.foto}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ScrollView>
-    
   );
 };
 
@@ -144,7 +147,7 @@ const styles = StyleSheet.create({
     height: 30,
   },
   content: {
-    paddingBottom: 10, 
+    paddingBottom: 10,
   },
   title: {
     fontSize: 15,
@@ -192,7 +195,7 @@ const styles = StyleSheet.create({
     color: "#b20000",
   },
   linha: {
-    marginTop: 20, 
+    marginTop: 20,
     marginHorizontal: 20,
     height: 1,
     backgroundColor: "#b9b8b8ff",
@@ -226,7 +229,7 @@ const styles = StyleSheet.create({
   cardText: {
     color: "#fff",
     fontSize: 17,
-     fontFamily: "NunitoSans-Light",
+    fontFamily: "NunitoSans-Light",
   },
   botaoVerMais: {
     marginTop: 15,
@@ -240,12 +243,13 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
 
-  doacoes:{
+  doacoes: {
     justifyContent: "center",
     alignItems: "center",
   },
 
-  foto:{
+  foto: {
     marginTop: 20,
-  }
+    marginBottom: 100,
+  },
 });
