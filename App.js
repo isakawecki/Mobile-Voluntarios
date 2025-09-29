@@ -16,6 +16,8 @@ import Home from './screens/Home';
 import SaibaMais from './screens/SaibaMais';
 import VerMais from './screens/VerMais';
 import DoacaoDinheiro from './screens/DoacaoDinheiro';
+import DoacaoMateriais from './screens/DoacaoMateriais';
+import Menu from './screens/Menu';
 
 
 
@@ -51,6 +53,8 @@ export default function App() {
         <Pilha.Screen name="SaibaMais" component= {SaibaMais} />
         <Pilha.Screen name="VerMais" component= {VerMais} />
         <Pilha.Screen name="DoacaoDinheiro" component= {DoacaoDinheiro} />
+        <Pilha.Screen name="DoacaoMateriais" component= {DoacaoMateriais} />
+        <Pilha.Screen name="Menu" component= {Menu} />
       </Pilha.Navigator>
     </NavigationContainer>
   );

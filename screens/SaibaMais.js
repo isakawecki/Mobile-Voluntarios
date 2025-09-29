@@ -11,6 +11,9 @@ import {
 const SaibaMais = ({ navigation }) => { 
     const handleDoacaoDinheiro = () => {
     navigation.navigate("DoacaoDinheiro");
+      const handleDoacaoMateriais = () => {
+    navigation.navigate("DoacaoMateriais");
+  };
   }; 
 return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -56,12 +59,14 @@ return (
                                    resizeMode="contain"
                                  />
                                </TouchableOpacity>
-                   
+                   <TouchableOpacity onPress={handleDoacaoMateriais}>
                      <Image
                         source={require('../assets/images/Component 25.png')}
                             style={styles.doar}
                             resizeMode="contain"
                            />
+                           </TouchableOpacity>
+                           
                     <Image
                             source={require('../assets/images/Component 26.png')}
                             style={styles.ultima}

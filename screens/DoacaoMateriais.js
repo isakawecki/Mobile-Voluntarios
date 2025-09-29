@@ -13,7 +13,7 @@ import {
   Keyboard,
 } from "react-native";
 
-const DoacaoDinheiro = ({ navigation }) => {
+const DoacaoMateriais = ({ navigation }) => {
   const [valor, setValor] = useState("");
   const [tipoDoacao, setTipoDoacao] = useState("avulso");
   const [nomeCompleto, setNomeCompleto] = useState("");
@@ -31,12 +31,7 @@ const DoacaoDinheiro = ({ navigation }) => {
   const [metodoSelecionado, setMetodoSelecionado] = useState(null);
 
 
-  const icons = {
-    debito: require("../assets/images/debito.png"),
-    boleto: require("../assets/images/boleto.png"),
-    credito: require("../assets/images/credito.png"),
-    pix: require("../assets/images/pix.png"),
-  };
+  
 
   return (
     <KeyboardAvoidingView
@@ -79,53 +74,33 @@ const DoacaoDinheiro = ({ navigation }) => {
             </Text>
 
             <Image
-              source={require("../assets/images/Rectangle 52.png")}
+              source={require("../assets/images/alimentos.png")}
               style={styles.foto}
             />
           </View>
 
           <View style={styles.formulario}>
             <Text style={styles.tituloTres}>Doação</Text>
+              <View style={styles.linhaTexto}>
+              <Text style={styles.label}>O que você deseja doar?:</Text>
+             
 
-            <View style={styles.linhaTexto}>
-              <Text style={styles.label}>Digite o valor da doação:</Text>
-              <Text style={styles.moeda}> R$ </Text>
-              <TextInput
-                style={styles.input}
-                value={valor}
-                onChangeText={setValor}
-                placeholder="00,00"
-                keyboardType="numeric"
-              />
-            </View>
-
-            <View style={styles.radioGroup}>
-              <TouchableOpacity
-                style={styles.radioItem}
-                onPress={() => setTipoDoacao("avulso")}
-              >
-                <View
-                  style={[
-                    styles.radioCircle,
-                    tipoDoacao === "avulso" && styles.radioCircleSelected,
-                  ]}
+              <View style={styles.inputComIcone}>
+                
+                <TextInput
+                  style={styles.inputNome}
+                  value={nomeCompleto}
+                  onChangeText={setNomeCompleto}
+                  placeholderTextColor="#aaa"
                 />
-                <Text style={styles.radioLabel}>Avulso</Text>
-              </TouchableOpacity>
+              </View>
+               
+              </View>
+               <Text style={styles.textoAviso}>
+             Sua escolha de doação, passa por um proceso de avaliação, você receberá um aviso para prosseguir com a entrega!
+            </Text>
 
-              <TouchableOpacity
-                style={styles.radioItem}
-                onPress={() => setTipoDoacao("mensal")}
-              >
-                <View
-                  style={[
-                    styles.radioCircle,
-                    tipoDoacao === "mensal" && styles.radioCircleSelected,
-                  ]}
-                />
-                <Text style={styles.radioLabel}>Mensal</Text>
-              </TouchableOpacity>
-            </View>
+           
             <Text style={styles.tituloQuatro}>Dados pessoais</Text>
 
             <View style={styles.linhaTexto}>
@@ -280,43 +255,7 @@ const DoacaoDinheiro = ({ navigation }) => {
               </View>
             </View>
 
-            <Text style={styles.tituloQuatro}>Pagamento</Text>
-
-
-            {["debito", "boleto", "credito", "pix"].map((metodo) => {
-              const labels = {
-                debito: "Débito automático",
-                boleto: "Boleto Bancário",
-                credito: "Cartão de Crédito",
-                pix: "Transferência PIX",
-              };
-              return (
-                <TouchableOpacity
-                  key={metodo}
-                  style={[
-                    styles.pagamentoBotao,
-                    metodoSelecionado === metodo && styles.pagamentoBotaoSelecionado ,
-                  ]}
-                  onPress={() => setMetodoSelecionado(metodo)}
-                >
-                  <Image source={icons[metodo]} style={styles.pagamentoIcon} />
-                  <Text
-                    style={[
-                      styles.pagamentoTexto,
-                      metodoSelecionado === metodo && styles.pagamentoTextoSelecionado,
-                    ]}
-                  >
-                    {labels[metodo]}
-                  </Text>
-                  <View
-                    style={[
-                      styles.pagamentoRadio,
-                      metodoSelecionado === metodo && styles.pagamentoRadioSelecionado,
-                    ]}
-                  />
-                </TouchableOpacity>
-              );
-            })}
+            
 
             
         
@@ -335,7 +274,7 @@ const DoacaoDinheiro = ({ navigation }) => {
   );
 };
 
-export default DoacaoDinheiro;
+export default DoacaoMateriais;
 
 const styles = StyleSheet.create({
   container: {
@@ -436,9 +375,11 @@ const styles = StyleSheet.create({
     color: "#000000",
     marginHorizontal: 18,
   },
-  moeda: {
-    fontSize: 13,
-    color: "#707070",
+  textoAviso:{
+     fontFamily: "Raleway-Bold",
+     color: "#AAAAAA",
+     fontSize: 12,
+     marginTop: 10,
   },
   input: {
     fontSize: 13,

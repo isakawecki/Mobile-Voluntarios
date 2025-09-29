@@ -1,28 +1,36 @@
-import React from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-} from "react-native";
+import React, { useState } from "react";
+import { View, Text, ScrollView, StyleSheet, Image, TouchableOpacity, ImageBackground } from "react-native";
+import MenuModal from "./Menu"; // Importando o Modal de Menu
 
 const Home = ({ navigation }) => {
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   const handleSaibaMais = () => {
     navigation.navigate("SaibaMais");
   };
+
   const handleVerMais = () => {
     navigation.navigate("VerMais");
   };
+
   const handleDoacaoDinheiro = () => {
     navigation.navigate("DoacaoDinheiro");
   };
+
+  const handleDoacaoMateriais = () => {
+    navigation.navigate("DoacaoMateriais");
+  };
+
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={toggleModal}> {/* Toggled by clicking here */}
           <Image
             source={require("../assets/images/Menu.png")}
             style={styles.icon}
@@ -48,10 +56,7 @@ const Home = ({ navigation }) => {
             <Text style={styles.textoSaiba}>Saiba Mais</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.botaoAgenda}
-            onPress={() => console.log("Minha agenda clicada")}
-          >
+          <TouchableOpacity style={styles.botaoAgenda} onPress={() => console.log("Minha agenda clicada")}>
             <Text style={styles.textoAgenda}>Minha agenda</Text>
           </TouchableOpacity>
         </View>
@@ -101,27 +106,29 @@ const Home = ({ navigation }) => {
         <TouchableOpacity style={styles.botaoVerMais} onPress={handleVerMais}>
           <Text style={styles.textoVermais}>Ver mais...</Text>
         </TouchableOpacity>
-        <View style={styles.eventosContainer}>
-          <Text style={styles.evca}>Faça uma doação </Text>
-          <View style={styles.doacoes}>
-            <TouchableOpacity onPress={handleDoacaoDinheiro}>
-              <Image
-                source={require("../assets/images/Component 24.png")}
-                style={styles.foto1}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
 
-            <TouchableOpacity onPress={handleSaibaMais}>
-              <Image
-                source={require("../assets/images/Component 25.png")}
-                style={styles.foto}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-          </View>
+        <Text style={styles.evca}>Faça uma doação </Text>
+        <View style={styles.doacoes}>
+          <TouchableOpacity onPress={handleDoacaoDinheiro}>
+            <Image
+              source={require("../assets/images/Component 24.png")}
+              style={styles.foto1}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={handleDoacaoMateriais}>
+            <Image
+              source={require("../assets/images/Component 25.png")}
+              style={styles.foto}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
         </View>
       </View>
+
+      {/* Menu Modal */}
+      <MenuModal visible={isModalVisible} onClose={toggleModal} />
     </ScrollView>
   );
 };
