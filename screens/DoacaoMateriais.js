@@ -31,7 +31,7 @@ const DoacaoMateriais = ({ navigation }) => {
   const [metodoSelecionado, setMetodoSelecionado] = useState(null);
 
 
-  
+
 
   return (
     <KeyboardAvoidingView
@@ -58,7 +58,7 @@ const DoacaoMateriais = ({ navigation }) => {
               />
               <Text style={styles.titulo}>Voluntários Pro Bem</Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
               <Image
                 source={require("../assets/images/User.png")}
                 style={styles.icon}
@@ -81,12 +81,12 @@ const DoacaoMateriais = ({ navigation }) => {
 
           <View style={styles.formulario}>
             <Text style={styles.tituloTres}>Doação</Text>
-              <View style={styles.linhaTexto}>
+            <View style={styles.linhaTexto}>
               <Text style={styles.label}>O que você deseja doar?:</Text>
-             
+
 
               <View style={styles.inputComIcone}>
-                
+
                 <TextInput
                   style={styles.inputNome}
                   value={nomeCompleto}
@@ -94,13 +94,13 @@ const DoacaoMateriais = ({ navigation }) => {
                   placeholderTextColor="#aaa"
                 />
               </View>
-               
-              </View>
-               <Text style={styles.textoAviso}>
-             Sua escolha de doação, passa por um proceso de avaliação, você receberá um aviso para prosseguir com a entrega!
+
+            </View>
+            <Text style={styles.textoAviso}>
+              Sua escolha de doação, passa por um proceso de avaliação, você receberá um aviso para prosseguir com a entrega!
             </Text>
 
-           
+
             <Text style={styles.tituloQuatro}>Dados pessoais</Text>
 
             <View style={styles.linhaTexto}>
@@ -255,17 +255,17 @@ const DoacaoMateriais = ({ navigation }) => {
               </View>
             </View>
 
-            
 
-            
-        
+
+
+
           </View >
           <View style={styles.fim}>
             <TouchableOpacity onPress={console.log("ok")} style={styles.botaoContinuar}>
-                      <Text style={styles.textoContinuar}>Continuar</Text>
-                    </TouchableOpacity>
+              <Text style={styles.textoContinuar}>Continuar</Text>
+            </TouchableOpacity>
 
-            </View>
+          </View>
 
 
         </ScrollView>
@@ -375,11 +375,11 @@ const styles = StyleSheet.create({
     color: "#000000",
     marginHorizontal: 18,
   },
-  textoAviso:{
-     fontFamily: "Raleway-Bold",
-     color: "#AAAAAA",
-     fontSize: 12,
-     marginTop: 10,
+  textoAviso: {
+    fontFamily: "Raleway-Bold",
+    color: "#AAAAAA",
+    fontSize: 12,
+    marginTop: 10,
   },
   input: {
     fontSize: 13,
@@ -511,25 +511,25 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
   },
   fim: {
-  justifyContent: 'center',
-  alignItems: "center",
-  marginTop: 26,
-   marginBottom: 90,
+    justifyContent: 'center',
+    alignItems: "center",
+    marginTop: 26,
+    marginBottom: 90,
   },
 
-  botaoContinuar:{
-    backgroundColor:'#B20000',
+  botaoContinuar: {
+    backgroundColor: '#B20000',
     width: '80%',
     height: 39,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 16,
   },
-  textoContinuar:{
-    color:'#F3F3F3',
+  textoContinuar: {
+    color: '#F3F3F3',
     fontSize: 22,
-    fontFamily: 'NunitoSans-Light', 
-   
+    fontFamily: 'NunitoSans-Light',
+
   },
 
 });

@@ -10,7 +10,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform
-} from "react-native";
+} from "react-native";  
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CadastrarUsuario = ({ navigation }) => {
   const [nome, setNome] = useState("");
@@ -19,16 +20,37 @@ const CadastrarUsuario = ({ navigation }) => {
   const [telefone, setTelefone] = useState("");
   const [senha, setSenha] = useState("");
 
-  const handleCriar = () => {
-    // Verificar se algum campo está vazio
+  const handleCriar = async () => {
     if (!nome || !email || !cpf || !telefone || !senha) {
       Alert.alert("Campos obrigatórios", "Por favor, preencha todos os campos.");
       return;
     }
 
-    
-    Alert.alert("Usuário criado!", `Nome: ${nome}\nEmail: ${email}`);
-     navigation.navigate("Home");
+    try {
+      const usuariosJSON = await AsyncStorage.getItem("usuarios");
+      const usuarios = usuariosJSON ? JSON.parse(usuariosJSON) : [];
+
+      const usuarioExistente = usuarios.find((u) => u.email === email);
+      if (usuarioExistente) {
+        Alert.alert("Erro", "Este e-mail já está cadastrado.");
+        return;
+      }
+
+      const novoUsuario = { nome, email, cpf, telefone, senha };
+      usuarios.push(novoUsuario);
+
+      // Salva lista de usuários
+      await AsyncStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+      // Também salva o usuário logado atual
+      await AsyncStorage.setItem("usuario", JSON.stringify(novoUsuario));
+
+      Alert.alert("Sucesso!", "Usuário cadastrado com sucesso!");
+      navigation.navigate("Home");
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível salvar o usuário.");
+      console.error(error);
+    }
   };
 
   const handleCancelar = () => {
@@ -114,7 +136,6 @@ const estilos = StyleSheet.create({
     backgroundColor: "#ffffff",
     paddingBottom: 40,
   },
-
   image: {
     position: "absolute",
     top: -190,
@@ -123,7 +144,6 @@ const estilos = StyleSheet.create({
     height: 500,
     resizeMode: "cover",
   },
-
   texto: {
     fontSize: 50,
     fontFamily: "Raleway-Bold",
@@ -132,7 +152,6 @@ const estilos = StyleSheet.create({
     paddingHorizontal: 30,
     paddingBottom: 40,
   },
-
   input: {
     backgroundColor: "#f1f1f1",
     width: "86%",
@@ -142,13 +161,11 @@ const estilos = StyleSheet.create({
     fontSize: 15,
     padding: 14,
   },
-
   areaInferior: {
     alignItems: "center",
     marginTop: 20,
     gap: 10,
   },
-
   botaoCriar: {
     backgroundColor: "#b20000",
     paddingVertical: 19,
@@ -156,17 +173,14 @@ const estilos = StyleSheet.create({
     borderRadius: 20,
     marginTop: 55,
   },
-
   textoCadastrar: {
     color: "#fff",
     fontSize: 22,
-    fontFamily: "NunitoSans-Light", 
+    fontFamily: "NunitoSans-Light",
   },
-
   botaoCancelar: {
     marginTop: 10,
   },
-
   textoCancelar: {
     fontSize: 16,
     color: "#000",

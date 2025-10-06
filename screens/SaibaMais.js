@@ -11,10 +11,11 @@ import {
 const SaibaMais = ({ navigation }) => { 
     const handleDoacaoDinheiro = () => {
     navigation.navigate("DoacaoDinheiro");
+      }; 
       const handleDoacaoMateriais = () => {
     navigation.navigate("DoacaoMateriais");
-  };
-  }; 
+    };
+
 return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
  
@@ -32,7 +33,7 @@ return (
           />
           <Text style = { styles.titulo}>Voluntários Pro Bem</Text>
        </View>
-        <TouchableOpacity>
+         <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
           <Image
             source={require("../assets/images/User.png")}
             style={styles.icon}

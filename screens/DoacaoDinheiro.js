@@ -63,12 +63,12 @@ const DoacaoDinheiro = ({ navigation }) => {
               />
               <Text style={styles.titulo}>Voluntários Pro Bem</Text>
             </View>
-            <TouchableOpacity>
-              <Image
-                source={require("../assets/images/User.png")}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
+          <Image
+            source={require("../assets/images/User.png")}
+            style={styles.icon}
+          />
+        </TouchableOpacity>
           </View>
           <View style={styles.linha} />
 

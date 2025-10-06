@@ -20,7 +20,7 @@ return (
           />
         </TouchableOpacity>
       
-        <TouchableOpacity>
+         <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
           <Image
             source={require("../assets/images/User.png")}
             style={styles.icon}

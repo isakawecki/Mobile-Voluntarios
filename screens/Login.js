@@ -9,23 +9,45 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
+  Alert
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!email || !senha) {
-      alert("Preencha todos os campos!");
+      Alert.alert("Erro", "Preencha todos os campos!");
       return;
     }
-    navigation.navigate("Home"); 
+
+    try {
+      const usuariosJSON = await AsyncStorage.getItem("usuarios");
+      const usuarios = usuariosJSON ? JSON.parse(usuariosJSON) : [];
+
+      const usuario = usuarios.find(
+        (u) => u.email === email && u.senha === senha
+      );
+
+      if (usuario) {
+        await AsyncStorage.setItem("usuario", JSON.stringify(usuario)); // salva o usuário logado
+        Alert.alert("Bem-vindo!", `Olá, ${usuario.nome}!`);
+        navigation.navigate("Home");
+      } else {
+        Alert.alert("Erro", "Email ou senha incorretos!");
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Erro", "Falha ao acessar os dados.");
+    }
   };
 
   const handleCancelar = () => {
     navigation.goBack();
   };
+
   const handleRecuperacao = () => {
     navigation.navigate("RecuperacaoSenha");
   };
@@ -37,16 +59,13 @@ const Login = ({ navigation }) => {
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={styles.container}>
-
           <Image
             source={require("../assets/images/fundo2.png")}
             style={styles.backgroundImage}
             resizeMode="cover"
           />
 
-          {/* CONTEÚDO */}
           <View style={styles.content}>
-            {/* TÍTULO COM LOGO AO LADO */}
             <View style={styles.tituloContainer}>
               <Text style={styles.titulo}>Login</Text>
               <Image
@@ -58,7 +77,6 @@ const Login = ({ navigation }) => {
 
             <Text style={styles.subtexto}>Bom te ver de novo!</Text>
 
-            {/* EMAIL */}
             <TextInput
               style={styles.input}
               placeholder="Email"
@@ -69,7 +87,6 @@ const Login = ({ navigation }) => {
               autoCapitalize="none"
             />
 
-            {/* SENHA */}
             <TextInput
               style={styles.input}
               placeholder="Senha"
@@ -79,17 +96,14 @@ const Login = ({ navigation }) => {
               onChangeText={setSenha}
             />
 
-             {/* ESQUECEU A SENHA */}
             <TouchableOpacity onPress={handleRecuperacao}>
               <Text style={styles.textoEsqueceu}>Esqueceu a senha?</Text>
             </TouchableOpacity>
 
-            {/* BOTÃO ENTRAR */}
             <TouchableOpacity style={styles.botao} onPress={handleLogin}>
               <Text style={styles.textoBotao}>Entrar</Text>
             </TouchableOpacity>
 
-            {/* CANCELAR */}
             <TouchableOpacity onPress={handleCancelar}>
               <Text style={styles.textoCancelar}>Cancelar</Text>
             </TouchableOpacity>
@@ -112,7 +126,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     width: "100%",
     height: "110%",
-    
   },
   content: {
     flex: 1,
@@ -133,29 +146,22 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: "#000000ff",
     marginRight: 10,
-     fontFamily: 'Raleway-Bold',
+    fontFamily: 'Raleway-Bold',
   },
   logo: {
     width: 50,
     height: 50,
   },
-
-    textoBotao:{
-    color: "#fff",
-    fontSize: 22,
-    fontFamily: "NunitoSans-Light", 
-  },
-    
   subtexto: {
     fontSize: 19,
     color: "#000000ff",
     marginBottom: 20,
-     paddingRight: 159,
-     marginTop: -10,
+    paddingRight: 159,
+    marginTop: -10,
     fontFamily: 'NunitoSans-Light',
   },
   input: {
-      backgroundColor: "#f1f1f1",
+    backgroundColor: "#f1f1f1",
     width: "90%",
     height: 48,
     marginTop: 12,
@@ -164,7 +170,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   botao: {
-   backgroundColor: "#b20000",
+    backgroundColor: "#b20000",
     paddingVertical: 18,
     width: "90%",
     borderRadius: 20,
@@ -174,20 +180,19 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontSize: 22,
-   fontFamily: 'NunitoSans-Light', 
-    
+    fontFamily: 'NunitoSans-Light',
   },
   textoCancelar: {
     fontSize: 16,
     color: "#000000ff",
     marginTop: 17,
-    fontFamily: 'NunitoSans-Light', 
+    fontFamily: 'NunitoSans-Light',
   },
   textoEsqueceu: {
     fontSize: 15,
     color: "#b20000",
     marginTop: 27,
-    fontFamily: 'NunitoSans-Light', 
+    fontFamily: 'NunitoSans-Light',
     textDecorationLine: "underline",
     left: 87,
   },

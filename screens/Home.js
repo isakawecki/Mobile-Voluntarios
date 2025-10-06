@@ -30,13 +30,13 @@ const Home = ({ navigation }) => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={toggleModal}> {/* Toggled by clicking here */}
+        <TouchableOpacity onPress={toggleModal}>
           <Image
             source={require("../assets/images/Menu.png")}
             style={styles.icon}
           />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
           <Image
             source={require("../assets/images/User.png")}
             style={styles.icon}
