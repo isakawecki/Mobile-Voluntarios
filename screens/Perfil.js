@@ -9,6 +9,8 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
+import Notificacoes from "./Notificacoes";
+import Informacoes from "./Informacoes";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
@@ -45,7 +47,7 @@ const Perfil = ({ navigation }) => {
         style: "destructive",
         onPress: async () => {
           await AsyncStorage.removeItem("usuario");
-          navigation.replace("Login"); // redireciona para tela de login
+          navigation.replace("Login");
         },
       },
     ]);
@@ -64,7 +66,10 @@ const Perfil = ({ navigation }) => {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         {/* Header */}
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.voltar}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.voltar}
+          >
             <Ionicons name="arrow-back" size={28} color="#000000ff" />
           </TouchableOpacity>
           <Text style={styles.titulo}>Perfil</Text>
@@ -84,8 +89,12 @@ const Perfil = ({ navigation }) => {
           />
 
           <View style={styles.infoContainer}>
-            <Text style={styles.nome}>{usuario?.nome || "Nome não disponível"}</Text>
-            <Text style={styles.email}>{usuario?.email || "Email não disponível"}</Text>
+            <Text style={styles.nome}>
+              {usuario?.nome || "Nome não disponível"}
+            </Text>
+            <Text style={styles.email}>
+              {usuario?.email || "Email não disponível"}
+            </Text>
 
             {/* Botão de editar */}
             <TouchableOpacity
@@ -100,34 +109,60 @@ const Perfil = ({ navigation }) => {
         {/* Seções adicionais */}
         <View style={styles.opcoesContainer}>
           {/* Minha Conta */}
-          <Text style={[styles.tituloSecao, { marginTop: 15 }]}>Minha Conta</Text>
-
-          <TouchableOpacity style={styles.opcao}>
+          <Text style={[styles.tituloSecao, { marginTop: 15 }]}>
+            Minha Conta
+          </Text>
+          <TouchableOpacity
+            style={styles.opcao}
+            onPress={() => {
+              console.log("Navegando para Notificações!");
+              navigation.navigate("Notificacoes");
+            }}
+          >
             <View style={styles.opcaoEsquerda}>
-              <Ionicons name="notifications-outline" size={22} color="#000000ff" />
+              <Ionicons
+                name="notifications-outline"
+                size={22}
+                color="#000000ff"
+              />
               <Text style={styles.textoOpcao}>Notificações</Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color="#000000ff" />
           </TouchableOpacity>
+
           <View style={styles.linhaOpcao} />
 
-          <TouchableOpacity style={styles.opcao}>
+          <TouchableOpacity
+            style={styles.opcao}
+            onPress={() => {navigation.navigate("Informacoes"); 
+               console.log("Navegando para Informações Pessoais!");
+              
+            }}
+          >
             <View style={styles.opcaoEsquerda}>
-              <Ionicons name="information-circle-outline" size={22} color="#000000ff" />
+              <Ionicons
+                name="information-circle-outline"
+                size={22}
+                color="#000000ff"
+              />
               <Text style={styles.textoOpcao}>Informações Pessoais</Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color="#000000ff" />
           </TouchableOpacity>
+
           <View style={styles.linhaOpcao} />
 
           {/* Preciso de ajuda */}
-          <Text style={[styles.tituloSecao, { marginTop: 50 }]}>Preciso de ajuda</Text>
-          <TouchableOpacity
-            style={styles.opcao}
-            onPress={() => navigation.navigate("ChatAjuda")}
-          >
+          <Text style={[styles.tituloSecao, { marginTop: 50 }]}>
+            Preciso de ajuda
+          </Text>
+          <TouchableOpacity style={styles.opcao}>
             <View style={styles.opcaoEsquerda}>
-              <Ionicons name="chatbubbles-outline" size={22} color="#000000ff" />
+              <Ionicons
+                name="chatbubbles-outline"
+                size={22}
+                color="#000000ff"
+              />
               <Text style={styles.textoOpcao}>Conversar no chat</Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color="#000000ff" />
